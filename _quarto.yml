@@ -5,7 +5,6 @@ website:
   title: "CS5805-ML1-Blog"
   navbar:
     right:
-      - about.qmd
       - icon: github
         href: https://github.com/
       - icon: twitter
