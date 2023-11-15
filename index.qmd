@@ -3,6 +3,6 @@ title: "CS5805 Machine Learning I Blog"
 listing:
   contents: posts
   type: default
-page-layout: full
-title-block-banner: true
+page-layout: article
+title-block-banner: false
 ---

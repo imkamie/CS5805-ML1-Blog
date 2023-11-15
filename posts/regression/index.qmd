@@ -1,8 +1,10 @@
 ---
 execute:
   echo: fenced
+title: "Linear and nonlinear regression"
 toc: true
 toc-title: "Table of Contents"
+title-block-banner: false
 ---
 
-### Linear and nonlinear regression
+

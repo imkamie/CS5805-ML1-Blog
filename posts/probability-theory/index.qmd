@@ -1,8 +1,52 @@
 ---
 execute:
   echo: fenced
+title: "Probability theory and random variables"
 toc: true
 toc-title: "Table of Contents"
+title-block-banner: false
 ---
 
-### Probability theory and random variables
+
+Machine learning often involves the use of probability theory and random variables to model uncertainty, make predictions, and make decisions. Let's break down some key concepts in this context:
+
+## Probability Theory
+
+Probability: In machine learning, probability is used to quantify uncertainty. It is a measure of the likelihood that a particular event will occur. Probabilities range from 0 (impossible event) to 1 (certain event). In the context of machine learning, probabilities are often associated with outcomes of interest.
+
+Conditional Probability: This is the probability of an event occurring given that another event has already occurred. In machine learning, understanding conditional probability is crucial, especially in Bayesian methods.
+
+Bayesian Inference: It's an approach to statistical inference where Bayes' theorem is used to update the probability for a hypothesis as more evidence or information becomes available.
+
+## Random Variables
+
+A random variable is a variable whose possible values are outcomes of a random phenomenon. In machine learning, random variables are used to model uncertainty in various processes.
+
+Discrete Random Variables: These take on a countable number of distinct values. For example, the outcome of rolling a die is a discrete random variable.
+
+Continuous Random Variables: These can take any value within a range. Examples include the height of a person or the temperature at a given time.
+
+## Probability Distributions
+
+A probability distribution describes how the values of a random variable are distributed. In machine learning, probability distributions are used to model uncertainty in data and parameters.
+
+Discrete Probability Distributions: Examples include the binomial distribution (for binary outcomes) and the Poisson distribution (for count data).
+
+Continuous Probability Distributions: Examples include the normal distribution (bell-shaped curve) and the exponential distribution.
+
+## Expectation and Variance
+
+Expectation (Mean): It is the average value of a random variable. In machine learning, it's often used to summarize the central tendency of a distribution.
+
+Variance: It measures how spread out the values of a random variable are. It gives a sense of the dispersion of data.
+
+## Joint and Marginal Distributions
+
+Joint Distribution: Describes the probability of multiple random variables occurring simultaneously.
+
+Marginal Distribution: Describes the probability distribution of a subset of random variables without reference to the values of the other variables.
+
+## Conclusion
+Understanding probability theory and random variables is crucial for various machine learning tasks, including classification, regression, and reinforcement learning. Probabilistic models provide a natural framework for dealing with uncertainty in real-world data.
+
+

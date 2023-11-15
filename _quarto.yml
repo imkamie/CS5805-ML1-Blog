@@ -1,14 +1,16 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "CS5805-ML1-Blog"
 
 format:
   html:
+    code-fold: true
     theme:
       dark: darkly
       light: flatly
 
-
+jupyter: python3
 

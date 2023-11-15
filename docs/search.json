@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CS5805 Machine Learning I Blog",
+    "section": "",
+    "text": "Anomaly/outlier detection\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nClassification\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nClustering\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nLinear and nonlinear regression\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nProbability theory and random variables\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/probability-theory/index.html",
+    "href": "posts/probability-theory/index.html",
+    "title": "Probability theory and random variables",
+    "section": "",
+    "text": "Machine learning often involves the use of probability theory and random variables to model uncertainty, make predictions, and make decisions. Let’s break down some key concepts in this context:"
+  },
+  {
+    "objectID": "posts/probability-theory/index.html#probability-theory",
+    "href": "posts/probability-theory/index.html#probability-theory",
+    "title": "Probability theory and random variables",
+    "section": "Probability Theory",
+    "text": "Probability Theory\nProbability: In machine learning, probability is used to quantify uncertainty. It is a measure of the likelihood that a particular event will occur. Probabilities range from 0 (impossible event) to 1 (certain event). In the context of machine learning, probabilities are often associated with outcomes of interest.\nConditional Probability: This is the probability of an event occurring given that another event has already occurred. In machine learning, understanding conditional probability is crucial, especially in Bayesian methods.\nBayesian Inference: It’s an approach to statistical inference where Bayes’ theorem is used to update the probability for a hypothesis as more evidence or information becomes available."
+  },
+  {
+    "objectID": "posts/probability-theory/index.html#random-variables",
+    "href": "posts/probability-theory/index.html#random-variables",
+    "title": "Probability theory and random variables",
+    "section": "Random Variables",
+    "text": "Random Variables\nA random variable is a variable whose possible values are outcomes of a random phenomenon. In machine learning, random variables are used to model uncertainty in various processes.\nDiscrete Random Variables: These take on a countable number of distinct values. For example, the outcome of rolling a die is a discrete random variable.\nContinuous Random Variables: These can take any value within a range. Examples include the height of a person or the temperature at a given time."
+  },
+  {
+    "objectID": "posts/probability-theory/index.html#probability-distributions",
+    "href": "posts/probability-theory/index.html#probability-distributions",
+    "title": "Probability theory and random variables",
+    "section": "Probability Distributions",
+    "text": "Probability Distributions\nA probability distribution describes how the values of a random variable are distributed. In machine learning, probability distributions are used to model uncertainty in data and parameters.\nDiscrete Probability Distributions: Examples include the binomial distribution (for binary outcomes) and the Poisson distribution (for count data).\nContinuous Probability Distributions: Examples include the normal distribution (bell-shaped curve) and the exponential distribution."
+  },
+  {
+    "objectID": "posts/probability-theory/index.html#expectation-and-variance",
+    "href": "posts/probability-theory/index.html#expectation-and-variance",
+    "title": "Probability theory and random variables",
+    "section": "Expectation and Variance",
+    "text": "Expectation and Variance\nExpectation (Mean): It is the average value of a random variable. In machine learning, it’s often used to summarize the central tendency of a distribution.\nVariance: It measures how spread out the values of a random variable are. It gives a sense of the dispersion of data."
+  },
+  {
+    "objectID": "posts/probability-theory/index.html#joint-and-marginal-distributions",
+    "href": "posts/probability-theory/index.html#joint-and-marginal-distributions",
+    "title": "Probability theory and random variables",
+    "section": "Joint and Marginal Distributions",
+    "text": "Joint and Marginal Distributions\nJoint Distribution: Describes the probability of multiple random variables occurring simultaneously.\nMarginal Distribution: Describes the probability distribution of a subset of random variables without reference to the values of the other variables."
+  },
+  {
+    "objectID": "posts/probability-theory/index.html#conclusion",
+    "href": "posts/probability-theory/index.html#conclusion",
+    "title": "Probability theory and random variables",
+    "section": "Conclusion",
+    "text": "Conclusion\nUnderstanding probability theory and random variables is crucial for various machine learning tasks, including classification, regression, and reinforcement learning. Probabilistic models provide a natural framework for dealing with uncertainty in real-world data."
+  }
+]
