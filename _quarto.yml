@@ -3,16 +3,12 @@ project:
 
 website:
   title: "CS5805-ML1-Blog"
-  navbar:
-    right:
-      - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme:
+      dark: darkly
+      light: flatly
 
 
 

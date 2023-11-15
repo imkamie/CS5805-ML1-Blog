@@ -1,0 +1,9 @@
+---
+execute:
+  echo: fenced
+toc: true
+toc-title: "Table of Contents"
+---
+
+### Anomaly/outlier detection
+
