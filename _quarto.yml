@@ -9,8 +9,8 @@ format:
   html:
     code-fold: true
     theme:
-      dark: darkly
       light: flatly
+      dark: darkly
 
 jupyter: python3
 
