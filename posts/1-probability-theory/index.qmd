@@ -5,6 +5,7 @@ title: "Probability theory and random variables"
 toc: true
 toc-title: "Table of Contents"
 title-block-banner: false
+author: Kamila Nurkhametova
 ---
 
 Machine learning often involves the use of probability theory and random variables to model uncertainty, make predictions, and make decisions. Let's break down some key concepts in this context.

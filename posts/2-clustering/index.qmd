@@ -5,6 +5,7 @@ title: "Clustering"
 toc: true
 toc-title: "Table of Contents"
 title-block-banner: false
+author: Kamila Nurkhametova
 ---
 
 Clustering is a technique used in unsupervised machine learning to group similar instances together into clusters. The goal is to identify patterns and relationships within the data without any pre-existing labels. Clustering is a great tool for data analysis, customer segmentation, recommender systems, search engines, image segmentation, semi-supervised learning, dimensionality reduction, and more.
