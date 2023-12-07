@@ -2,7 +2,8 @@
 title: "CS5805 Machine Learning I Blog"
 listing:
   contents: posts
-  type: default
+  type: grid
 page-layout: article
 title-block-banner: false
+author: Kamila Nurkhametova
 ---
