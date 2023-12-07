@@ -1,0 +1,86 @@
+---
+execute:
+  echo: fenced
+title: "Linear and Nonlinear regression"
+title-block-banner: false
+author: Kamila Nurkhametova
+---
+
+
+Linear and nonlinear regression are both techniques used in machine learning and statistics to model the relationship between independent variables (features) and a dependent variable (target). The primary difference between them lies in the nature of the relationship they can capture.
+
+## Linear Regression:
+
+**Nature of Relationship:**
+Linear regression assumes a linear relationship between the independent and dependent variables. This means that the relationship can be represented by a straight line.
+
+**Equation:**
+The equation for a simple linear regression with one independent variable is: $y = mx + b$, where $y$ is the dependent variable, $x$ is the independent variable, $m$ is the slope, and $b$ is the y-intercept.
+
+**Optimization:**
+The model parameters (slope and intercept) are typically estimated using methods like Ordinary Least Squares (OLS) to minimize the sum of squared differences between the observed and predicted values.
+
+## Nonlinear Regression:
+
+**Nature of Relationship:**
+Nonlinear regression allows for more complex relationships between the independent and dependent variables. The relationship can take various forms, such as quadratic, exponential, logarithmic, or other nonlinear shapes.
+
+**Equation:**
+The equation for a general nonlinear regression model is more complex and depends on the specific form of the relationship being modeled. For example, it could be $y = a \cdot \log(x) + b$.
+
+**Optimization:**
+Optimization techniques such as gradient descent or other nonlinear optimization methods are used to find the parameters that minimize the difference between the predicted and observed values.
+
+
+In practice, the choice between linear and nonlinear regression depends on the characteristics of the data and the underlying assumptions about the relationship being modeled. Data exploration and validation techniques are essential in determining the most appropriate approach.
+
+## Example: Linear Regression with California Housing Data
+
+Let's illustrate linear regression using the California Housing dataset. We'll predict housing prices based on features and visualize the model's performance.
+
+```{python}
+# Import necessary libraries
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.datasets import fetch_california_housing
+
+# Load the California Housing dataset
+california_housing = fetch_california_housing()
+X = california_housing.data
+y = california_housing.target
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a linear regression model
+model = LinearRegression()
+
+# Train the model on the training set
+model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+print(f'Mean Squared Error: {mse}')
+
+# Plotting the results
+plt.scatter(y_test, y_pred)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'r-', lw=2)
+plt.xlabel("Actual Prices")
+plt.ylabel("Predicted Prices")
+plt.title("Actual Prices vs Predicted Prices")
+plt.show()
+
+```
+
+In the visualization, the red line represents a perfect prediction, and the scatter plot compares actual housing prices with the predicted values. The Mean Squared Error (MSE) quantifies the model's performance. Adjustments to the model or exploration of nonlinear regression may be necessary based on the analysis.
+
+## Conclusion
+
+Linear and nonlinear regression techniques offer versatile approaches for modeling relationships in data. Linear regression provides a simple and interpretable solution for linear dependencies, while nonlinear regression extends the capability to capture more complex patterns. The choice between them should be guided by the specific characteristics of the data and the nature of the relationship under investigation. Continuous evaluation and refinement of models based on performance metrics, such as Mean Squared Error, are crucial for building robust and accurate regression models.
