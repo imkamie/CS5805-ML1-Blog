@@ -6,13 +6,19 @@ title-block-banner: false
 author: Kamila Nurkhametova
 ---
 
-Anomaly and Outlier Detection play crucial roles in machine learning as they ensure that models accurately represent the overall dataset.
+Anomaly and outlier detection are essential components of machine learning, ensuring that models accurately capture the underlying patterns within a dataset. Anomalies represent data points that deviate from the expected pattern or distribution, while outliers are observations with a low probability of occurrence, often distant from other data points.
 
-Anomalies are data points that deviate from the expected pattern or distribution of the rest of the data. Detecting anomalies is vital as they can reveal important information. For instance, in analyzing credit card transactions, anomaly detection can identify fraudulent activities by spotting unusual amounts or transactions with atypical businesses. This process can lead to the discovery of new features for model improvement or even the development of an entirely new model.
+## Importance of Anomaly Detection
 
-Outliers, on the other hand, are observations with a low probability of occurrence within the dataset, often distant from other data points. Outliers may result from human or experimental errors, and sometimes their cause is unknown. Detecting outliers is crucial because they can distort the model and impact the accuracy of future predictions.
+Detecting anomalies is crucial for various applications, such as identifying fraudulent activities in credit card transactions. Unusual amounts or transactions with atypical businesses can be flagged, leading to improved model features or the development of entirely new models.
 
-One method employed for outlier detection is DBSCAN (Density-Based Spatial Clustering of Applications With Noise). In this method, a point is considered part of the clustering algorithm if it falls within a certain radius of a core point (which has a minimum number of points in its radius). If this condition is not met, DBSCAN marks the point as an outlier. The multishapes dataset will be utilized to illustrate this concept.
+## Significance of Outlier Detection
+
+Outliers, resulting from errors or unknown causes, can distort models and impact prediction accuracy. Recognizing outliers is vital to maintaining model integrity and ensuring robust predictions.
+
+## DBSCAN for Outlier Detection
+
+One method for outlier detection is DBSCAN (Density-Based Spatial Clustering of Applications With Noise). This technique considers a point as part of a cluster if it falls within a specified radius of a core point. Otherwise, the point is marked as an outlier. We will illustrate this concept using the multishapes dataset.
 
 ```{python}
 # Import necessary libraries
@@ -23,7 +29,6 @@ from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
 
 # Load the Credit Card Fraud Detection dataset
-url = "https://storage.googleapis.com/download.tensorflow.org/data/creditcard.csv"
 df = pd.read_csv("creditcard.csv")
 
 # Display the first few rows of the dataset
@@ -53,5 +58,10 @@ plt.ylabel('V2')
 plt.legend()
 plt.show()
 
-
 ```
+
+In the visualization, normal data points are marked in blue, while outliers are highlighted in red. This representation provides a clear distinction between the normal and outlier observations based on the Isolation Forest model.
+
+## Conclusion
+
+Anomaly and outlier detection are indispensable for maintaining the reliability and accuracy of machine learning models. Employing techniques like DBSCAN and Isolation Forest allows for the identification of unusual patterns, contributing to enhanced model performance and the overall effectiveness of predictive systems.
