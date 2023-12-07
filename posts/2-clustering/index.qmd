@@ -86,9 +86,7 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 # Apply DBSCAN clustering
-eps_value = 0.5
-min_samples_value = 5
-dbscan = DBSCAN(eps=eps_value, min_samples=min_samples_value)
+dbscan = DBSCAN(eps=0.5, min_samples=5)
 labels = dbscan.fit_predict(X_scaled)
 
 # Reduce the data to two dimensions using PCA
