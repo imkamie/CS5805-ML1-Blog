@@ -7,90 +7,6 @@
     "text": "Anomaly/outlier detection\n\n\n\n\n\n\nKamila Nurkhametova\n\n\n\n\n\n\n\n\n\n\n\n\nLinear and Nonlinear regression\n\n\n\n\n\n\nKamila Nurkhametova\n\n\n\n\n\n\n\n\n\n\n\n\nClassification\n\n\n\n\n\n\nKamila Nurkhametova\n\n\n\n\n\n\n\n\n\n\n\n\nProbability theory and random variables\n\n\n\n\n\n\nKamila Nurkhametova\n\n\n\n\n\n\n\n\n\n\n\n\nClustering\n\n\n\n\n\n\nKamila Nurkhametova\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/probability-theory/index.html",
-    "href": "posts/probability-theory/index.html",
-    "title": "Probability theory and random variables",
-    "section": "",
-    "text": "Machine learning often involves the use of probability theory and random variables to model uncertainty, make predictions, and make decisions. Let’s break down some key concepts in this context."
-  },
-  {
-    "objectID": "posts/probability-theory/index.html#basic-concepts",
-    "href": "posts/probability-theory/index.html#basic-concepts",
-    "title": "Probability theory and random variables",
-    "section": "Basic concepts",
-    "text": "Basic concepts\nBroadly speaking, probability theory is the mathematical study of uncertainty. It plays a central role in machine learning, as the design of learning algorithms often relies on probabilistic assumption of the data. This set of notes attempts to cover some basic probability theory that serves as a background for the class.\n\nProbability Theory\nIn machine learning, probability is used to quantify uncertainty. It is a measure of the likelihood that a particular event will occur. Probabilities range from 0 (impossible event) to 1 (certain event). In the context of machine learning, probabilities are often associated with outcomes of interest.\nConditional Probability. This is the probability of an event occurring given that another event has already occurred. In machine learning, understanding conditional probability is crucial, especially in Bayesian methods.\nBayesian Inference. It is an approach to statistical inference where Bayes’ theorem is used to update the probability for a hypothesis as more evidence or information becomes available.\n\n\nProbability Space\nWhen we speak about probability, we often refer to the probability of an event of uncertain nature taking place. For example, we speak about the probability of rain next Tuesday.\nFormally, a probability space is defined by the triple \\((\\Omega, \\mathcal{F}, P)\\), where\n\n\\(\\Omega\\) is the space of possible outcomes (or outcome space),\n\\(\\mathcal{F} \\subseteq 2^{\\Omega}\\) is the space of (measurable) events (or event space),\n\\(P\\) is the probability measure (or probability distribution) that maps an event \\(E \\in \\mathcal{F}\\) to a real value between 0 and 1 (think of \\(P\\) as a function).\n\n\n\nRandom Variables\nRandom variables play an important role in probability theory. The most important fact about random variables is that they are not variables. They are actually functions that map outcomes (in the outcome space) to real values. In terms of notation, we usually denote random variables by a capital letter\nIn machine learning, random variables are used to model uncertainty in various processes.\nDiscrete Random Variables. These take on a countable number of distinct values. For example, the outcome of rolling a die is a discrete random variable.\nContinuous Random Variables. These can take any value within a range. Examples include the height of a person or the temperature at a given time.\n\n\nProbability Distributions, Joint Distributions, and Marginal Distributions\nA probability distribution describes how the values of a random variable are distributed. In machine learning, probability distributions are used to model uncertainty in data and parameters.\nJoint Distribution describes the probability of multiple random variables occurring simultaneously.\nMarginal Distribution describes the probability distribution of a subset of random variables without reference to the values of the other variables.\nConditional distributions are one of the key tools in probability theory for reasoning about uncertainty. They specify the distribution of a random variable when the value of another random variable is known (or more generally, when some event is known to be true).\n\n\nBernoulli distribution\nThe Bernoulli distribution is one of the most basic distribution. A random variable distributed according to the Bernoulli distribution can take on two possible values, {0, 1}. It is often used to indicate whether a trail is successful or not.\n\n\nCode\n```{python}\n#| fig-cap: \"Bernoulli distribution\"\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import bernoulli\n\n# Set the mean rate for the Poisson distribution\np = 0.3\n\n# Generate data for a Bernoulli distribution\ndata = np.random.choice([0, 1], size=1000, p=[1 - p, p])\n\n# Create a histogram\nplt.hist(data, bins=[-0.5, 0.5, 1.5], density=True, alpha=0.6)\n\n# Plot the probability mass function (PMF) of the Bernoulli distribution\nx = [0, 1]\npmf_values = bernoulli.pmf(x, p)\nplt.vlines(x, 0, pmf_values, colors='k', linestyles='-', lw=2)\n\n# Add labels and a title\nplt.title('Bernoulli Distribution: $p$ = %.2f' % p)\nplt.xlabel('Outcome')\nplt.ylabel('Probability')\n\nplt.xticks([0, 1], ['Failure', 'Success'])\nplt.show()\n```\n\n\n\n\n\nBernoulli distribution\n\n\n\n\n\n\nPoisson distribution\nThe Poisson distribution is a very useful distribution that deals with the arrival of events. It measures probaiblity of the number of events happening over a fixed period of time, given a fixed average rate of occurrence, and that the events take place independently of the time since the last event.\n\n\nCode\n```{python}\n#| fig-cap: \"Poisson distribution\"\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import poisson\n\n# Set the mean rate for the Poisson distribution\nlam = 5\n\n# Generate data for a Poisson distribution\ndata = np.random.poisson(lam, 1000)\n\n# Create a histogram\nplt.hist(data, bins=50, density=True, alpha=0.6)\n\n# Plot the probability mass function (PMF) of the Poisson distribution\nxmin, xmax = plt.xlim()\nx = np.linspace(xmin, xmax, 100)\np = poisson.pmf(x, lam)\nplt.plot(x, p, 'k', linewidth=2)\n\n# Add labels and a title\nplt.title('Poisson Distribution: $\\lambda$ = %.2f' % lam)\nplt.xlabel('Number of Events')\nplt.ylabel('Probability')\n\nplt.show()\n```\n\n\n\n\n\nPoisson distribution\n\n\n\n\n\n\nGaussian distribution\nThe Gaussian distribution, also known as the normal distribution, is one of the most “versatile” distributions in probability theory, and appears in a wide variety of contexts. For example, it can be used to approximate the binomial distribution when the number of experiments is large, or the Poisson distribution when the average arrival rate is high. It is also related to the Law of Large Numbers. For many problems, we will also often assume that when noise in the system is Gaussian distributed. The list of applications is endless.\n\n\nCode\n```{python}\n#| fig-cap: \"Gussian distribution\"\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import norm\n\nmu = 0  # mean\nsigma = 1  # standard deviation\n\n# Generate data for a Gaussian distribution\ndata = np.random.normal(mu, sigma, 1000)\n\n# Create a histogram\nplt.hist(data, bins=50, density=True, alpha=0.6)\n\n# Plot the probability density function (PDF) of the Gaussian distribution\nxmin, xmax = plt.xlim()\nx = np.linspace(xmin, xmax, 100)\np = norm.pdf(x, mu, sigma)\nplt.plot(x, p, 'k')\n\n# Add labels and a title\nplt.title('Fit results: mu = %.2f,  std = %.2f' % (mu, sigma))\nplt.xlabel('Value')\nplt.ylabel('Frequency')\n\nplt.show()\n```\n\n\n\n\n\nGussian distribution"
-  },
-  {
-    "objectID": "posts/probability-theory/index.html#defining-a-probability-distribution",
-    "href": "posts/probability-theory/index.html#defining-a-probability-distribution",
-    "title": "Probability theory and random variables",
-    "section": "Defining a Probability Distribution",
-    "text": "Defining a Probability Distribution\nThere are two classes of distribution that require seemingly different treatments. Namely, discrete distributions and continuous distributions.\n\nDiscrete Distribution\nBy a discrete distribution, we mean that the random variable of the underlying distribution can take on only finitely many different values (or that the outcome space is finite). Examples include the binomial distribution (for binary outcomes) and the Poisson distribution (for count data).\n\n\nContinuous Distribution\nBy a continuous distribution, we mean that the random variable of the underlying distribution can take on infinitely many different values (or that the outcome space is infinite). Examples include the normal distribution (bell-shaped curve) and the exponential distribution."
-  },
-  {
-    "objectID": "posts/probability-theory/index.html#expectations-and-variance",
-    "href": "posts/probability-theory/index.html#expectations-and-variance",
-    "title": "Probability theory and random variables",
-    "section": "Expectations and Variance",
-    "text": "Expectations and Variance\nOne of the most common operations we perform on a random variable is to compute its expectation, also known as its mean, expected value, or first moment. The expectation is the average value of a random variable. In machine learning, it’s often used to summarize the central tendency of a distribution.\nVariance measures how spread out the values of a random variable are. It gives a sense of the dispersion of data. Sometimes it is also referred to as the second moment."
-  },
-  {
-    "objectID": "posts/probability-theory/index.html#conclusion",
-    "href": "posts/probability-theory/index.html#conclusion",
-    "title": "Probability theory and random variables",
-    "section": "Conclusion",
-    "text": "Conclusion\nUnderstanding probability theory and random variables is crucial for various machine learning tasks, including classification, regression, and reinforcement learning. Probabilistic models provide a natural framework for dealing with uncertainty in real-world data."
-  },
-  {
-    "objectID": "posts/clustering/index.html",
-    "href": "posts/clustering/index.html",
-    "title": "Clustering",
-    "section": "",
-    "text": "Clustering is a technique used in unsupervised machine learning to group similar instances together into clusters. The goal is to identify patterns and relationships within the data without any pre-existing labels. Clustering is a great tool for data analysis, customer segmentation, recommender systems, search engines, image segmentation, semi-supervised learning, dimensionality reduction, and more."
-  },
-  {
-    "objectID": "posts/clustering/index.html#the-k-means-algorithm",
-    "href": "posts/clustering/index.html#the-k-means-algorithm",
-    "title": "Clustering",
-    "section": "The k-means algorithm",
-    "text": "The k-means algorithm\nIt was proposed by Stuart Lloyd at Bell Labs in 1957 as a technique for pulse-code modulation, but it was only published outside of the company in 1982.⁠ In 1965, Edward W. Forgy had published virtually the same algorithm, so k-means is sometimes referred to as the Lloyd–Forgy algorithm.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import load_wine\nfrom sklearn.cluster import KMeans\nfrom sklearn.preprocessing import StandardScaler\n\n# Load the wine dataset\ndata = load_wine()\nX = data.data\n\n# Standardize the features\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Calculate distortion for a range of cluster values\ndistortions = []\nfor i in range(1, 10):\n    kmeans = KMeans(n_clusters=i, n_init=10, random_state=42)\n    kmeans.fit(X_scaled)\n    distortions.append(kmeans.inertia_)\n\n# Plot the elbow curve\nplt.figure()\nplt.plot(range(1, 10), distortions, marker='o')\nplt.title('Elbow Method for Optimal k')\nplt.xlabel('Number of Clusters')\nplt.ylabel('Distortion')\nplt.show()\n```\n\n\n\n\n\nAs we can see, the best number of cluster is 3."
-  },
-  {
-    "objectID": "posts/clustering/index.html#dbscan",
-    "href": "posts/clustering/index.html#dbscan",
-    "title": "Clustering",
-    "section": "DBSCAN",
-    "text": "DBSCAN\n\n\nCode\n```{python}\n# Standardize the features\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Apply DBSCAN clustering\neps_value = 0.5\nmin_samples_value = 5\ndbscan = DBSCAN(eps=eps_value, min_samples=min_samples_value)\nlabels = dbscan.fit_predict(X_scaled)\n\n# Reduce the data to two dimensions using PCA\npca = PCA(n_components=2)\nclustered_data_2d = pca.fit_transform(X_scaled)\n\n# Plot the data\nplt.scatter(clustered_data_2d[:, 0], clustered_data_2d[:, 1], c=labels, cmap='viridis')\n\n# Highlight noise points (label -1) with a different color\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\n\n# Add labels and title\nplt.title('DBSCAN Clustering')\n\n# plt.legend()\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/clustering/index.html#k-means",
-    "href": "posts/clustering/index.html#k-means",
-    "title": "Clustering",
-    "section": "k-means",
-    "text": "k-means\nIt was proposed by Stuart Lloyd at Bell Labs in 1957 as a technique for pulse-code modulation, but it was only published outside of the company in 1982.⁠ In 1965, Edward W. Forgy had published virtually the same algorithm, so k-means is sometimes referred to as the Lloyd–Forgy algorithm.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import load_wine\nfrom sklearn.cluster import KMeans\nfrom sklearn.cluster import DBSCAN\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.decomposition import PCA\n```\n\n\n\n\nCode\n```{python}\n# Load the wine dataset\ndata = load_wine()\nX = data.data\n\n# Standardize the features\nscaler = StandardScaler()\nX = scaler.fit_transform(X)\n\n# Calculate distortion for a range of cluster values\ndistortions = []\nfor i in range(1, 10):\n    kmeans = KMeans(n_clusters=i, n_init=10, random_state=42)\n    kmeans.fit(X)\n    distortions.append(kmeans.inertia_)\n\n# Plot the elbow curve\nplt.figure()\nplt.plot(range(1, 10), distortions, marker='o')\nplt.title('Elbow Method for Optimal k')\nplt.xlabel('Number of Clusters')\nplt.ylabel('Distortion')\nplt.show()\n```\n\n\n\n\n\nAs we can see, the best number of cluster is 3.\n\n\nCode\n```{python}\nkmeans = KMeans(n_clusters=3, n_init='auto')\nkmeans.fit(X)\nlabels = kmeans.labels_\n\n\n# Reduce the data to two dimensions using PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n\n# Plot the data\nplt.scatter(X_pca[:, 0], X_pca[:, 1], c=labels, cmap='viridis')\n\n# Calculate the cluster centers in the PCA reduced space and plot them\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\n\nplt.title('k-means Clustering')\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/2-clustering/index.html",
-    "href": "posts/2-clustering/index.html",
-    "title": "Clustering",
-    "section": "",
-    "text": "Clustering, a cornerstone of unsupervised machine learning, empowers the discovery of inherent patterns and relationships within data without pre-existing labels. This versatile technique finds applications in diverse domains, including data analysis, customer segmentation, recommender systems, search engines, image segmentation, semi-supervised learning, and dimensionality reduction."
-  },
-  {
-    "objectID": "posts/2-clustering/index.html#k-means",
-    "href": "posts/2-clustering/index.html#k-means",
-    "title": "Clustering",
-    "section": "k-means",
-    "text": "k-means\nIt was proposed by Stuart Lloyd at Bell Labs in 1957 as a technique for pulse-code modulation, but it was only published outside of the company in 1982.⁠ In 1965, Edward W. Forgy had published virtually the same algorithm, so k-means is sometimes referred to as the Lloyd–Forgy algorithm.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import load_wine\nfrom sklearn.cluster import KMeans\nfrom sklearn.cluster import DBSCAN\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.decomposition import PCA\n```\n\n\n\n\nCode\n```{python}\n# Load the wine dataset\ndata = load_wine()\nX = data.data\n\n# Standardize the features\nscaler = StandardScaler()\nX = scaler.fit_transform(X)\n\n# Calculate distortion for a range of cluster values\ndistortions = []\nfor i in range(1, 10):\n    kmeans = KMeans(n_clusters=i, n_init=10, random_state=42)\n    kmeans.fit(X)\n    distortions.append(kmeans.inertia_)\n\n# Plot the elbow curve\nplt.figure()\nplt.plot(range(1, 10), distortions, marker='o')\nplt.title('Elbow Method for Optimal k')\nplt.xlabel('Number of Clusters')\nplt.ylabel('Distortion')\nplt.show()\n```\n\n\n\n\n\nAs we can see, the best number of cluster is 3.\n\n\nCode\n```{python}\nkmeans = KMeans(n_clusters=3, n_init='auto')\nkmeans.fit(X)\nlabels = kmeans.labels_\n\n\n# Reduce the data to two dimensions using PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n\n# Plot the data\nplt.scatter(X_pca[:, 0], X_pca[:, 1], c=labels, cmap='viridis')\n\n# Calculate the cluster centers in the PCA reduced space and plot them\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\n\nplt.title('k-means Clustering')\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/2-clustering/index.html#dbscan",
-    "href": "posts/2-clustering/index.html#dbscan",
-    "title": "Clustering",
-    "section": "DBSCAN",
-    "text": "DBSCAN\n\n\nCode\n```{python}\n# Standardize the features\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Apply DBSCAN clustering\ndbscan = DBSCAN(eps=0.5, min_samples=5)\nlabels = dbscan.fit_predict(X_scaled)\n\n# Reduce the data to two dimensions using PCA\npca = PCA(n_components=2)\nclustered_data_2d = pca.fit_transform(X_scaled)\n\n# Plot the data\nplt.scatter(clustered_data_2d[:, 0], clustered_data_2d[:, 1], c=labels, cmap='viridis')\n\n# Highlight noise points (label -1) with a different color\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\n\n# Add labels and title\nplt.title('DBSCAN Clustering')\n\n# plt.legend()\nplt.show()\n```"
-  },
-  {
     "objectID": "posts/1-probability-theory/index.html",
     "href": "posts/1-probability-theory/index.html",
     "title": "Probability theory and random variables",
@@ -105,6 +21,27 @@
     "text": "Probability Theory: Probability in machine learning quantifies uncertainty, representing the likelihood of an event occurring, ranging from 0 (impossible) to 1 (certain). This is pivotal in algorithm design, often associated with outcomes of interest.\n\nConditional Probability: Probability of an event given another has occurred. Crucial in Bayesian methods.\nBayesian Inference: Uses Bayes’ theorem to update hypotheses’ probability with new evidence.\n\nRandom Variables: In probability theory, these are functions mapping outcomes to real values, classifying uncertainty.\n\nDiscrete Random Variables: Have countable distinct values, e.g., die outcomes.\nContinuous Random Variables: Can take any value within a range, like height or temperature.\n\nProbability Distributions: Describe how a random variable’s values are distributed. Key types include Joint, Marginal, and Conditional Distributions."
   },
   {
+    "objectID": "posts/1-probability-theory/index.html#bernoulli-distribution",
+    "href": "posts/1-probability-theory/index.html#bernoulli-distribution",
+    "title": "Probability theory and random variables",
+    "section": "",
+    "text": "The Bernoulli distribution models binary outcomes (0 or 1). Below is a Python example using scipy.stats.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import bernoulli\n\n# Set the mean rate for the Poisson distribution\np = 0.3\n\n# Generate data for a Bernoulli distribution\ndata = np.random.choice([0, 1], size=1000, p=[1 - p, p])\n\n# Create a histogram\nplt.hist(data, bins=[-0.5, 0.5, 1.5], density=True, alpha=0.6)\n\n# Plot the probability mass function (PMF) of the Bernoulli distribution\nx = [0, 1]\npmf_values = bernoulli.pmf(x, p)\nplt.vlines(x, 0, pmf_values, colors='k', linestyles='-', lw=2)\n\n# Add labels and a title\nplt.title('Bernoulli Distribution: $p$ = %.2f' % p)\nplt.xlabel('Outcome')\nplt.ylabel('Probability')\n\nplt.xticks([0, 1], ['Failure', 'Success'])\nplt.show()\n```"
+  },
+  {
+    "objectID": "posts/1-probability-theory/index.html#poisson-distribution",
+    "href": "posts/1-probability-theory/index.html#poisson-distribution",
+    "title": "Probability theory and random variables",
+    "section": "",
+    "text": "Poisson distribution models event occurrences over a fixed period. Example code:\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import poisson\n\n# Set the mean rate for the Poisson distribution\nlam = 5\n\n# Generate data for a Poisson distribution\ndata = np.random.poisson(lam, 1000)\n\n# Create a histogram\nplt.hist(data, bins=50, density=True, alpha=0.6)\n\n# Plot the probability mass function (PMF) of the Poisson distribution\nxmin, xmax = plt.xlim()\nx = np.linspace(xmin, xmax, 100)\np = poisson.pmf(x, lam)\nplt.plot(x, p, 'k', linewidth=2)\n\n# Add labels and a title\nplt.title('Poisson Distribution: $\\lambda$ = %.2f' % lam)\nplt.xlabel('Number of Events')\nplt.ylabel('Probability')\n\nplt.show()\n```"
+  },
+  {
+    "objectID": "posts/1-probability-theory/index.html#gaussian-distribution",
+    "href": "posts/1-probability-theory/index.html#gaussian-distribution",
+    "title": "Probability theory and random variables",
+    "section": "",
+    "text": "The Gaussian distribution, or normal distribution, is versatile in probability theory. Example code:\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import norm\n\nmu = 0  # mean\nsigma = 1  # standard deviation\n\n# Generate data for a Gaussian distribution\ndata = np.random.normal(mu, sigma, 1000)\n\n# Create a histogram\nplt.hist(data, bins=50, density=True, alpha=0.6)\n\n# Plot the probability density function (PDF) of the Gaussian distribution\nxmin, xmax = plt.xlim()\nx = np.linspace(xmin, xmax, 100)\np = norm.pdf(x, mu, sigma)\nplt.plot(x, p, 'k')\n\n# Add labels and a title\nplt.title('Fit results: mu = %.2f,  std = %.2f' % (mu, sigma))\nplt.xlabel('Value')\nplt.ylabel('Frequency')\n\nplt.show()\n```"
+  },
+  {
     "objectID": "posts/1-probability-theory/index.html#defining-a-probability-distribution",
     "href": "posts/1-probability-theory/index.html#defining-a-probability-distribution",
     "title": "Probability theory and random variables",
@@ -112,11 +49,11 @@
     "text": "Two classes: Discrete and Continuous Distributions. Discrete involves finite values; Continuous involves infinite values."
   },
   {
-    "objectID": "posts/1-probability-theory/index.html#expectations-and-variance",
-    "href": "posts/1-probability-theory/index.html#expectations-and-variance",
+    "objectID": "posts/1-probability-theory/index.html#classification-with-gaussian-naive-bayes",
+    "href": "posts/1-probability-theory/index.html#classification-with-gaussian-naive-bayes",
     "title": "Probability theory and random variables",
-    "section": "Expectations and Variance",
-    "text": "Expectations and Variance\nOne of the most common operations we perform on a random variable is to compute its expectation, also known as its mean, expected value, or first moment. The expectation is the average value of a random variable. In machine learning, it’s often used to summarize the central tendency of a distribution.\nVariance measures how spread out the values of a random variable are. It gives a sense of the dispersion of data. Sometimes it is also referred to as the second moment."
+    "section": "",
+    "text": "A practical example of applying probability theory in machine learning using Gaussian Naive Bayes for Iris dataset classification.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn import datasets\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.naive_bayes import GaussianNB\nfrom sklearn.metrics import accuracy_score, confusion_matrix\nfrom sklearn.preprocessing import StandardScaler\nimport seaborn as sns\n\n# Load the Iris dataset\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\n\n# Split the dataset into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)\n\n# Standardize the features (mean=0 and variance=1)\nscaler = StandardScaler()\nX_train = scaler.fit_transform(X_train)\nX_test = scaler.transform(X_test)\n\n# Train a Gaussian Naive Bayes classifier\nnb_classifier = GaussianNB()\nnb_classifier.fit(X_train, y_train)\n\n# Make predictions on the test set\ny_pred = nb_classifier.predict(X_test)\n\n# Evaluate the accuracy\naccuracy = accuracy_score(y_test, y_pred)\nprint(f'Accuracy: {accuracy:.2f}')\n\n# Plot the confusion matrix using seaborn\nconf_matrix = confusion_matrix(y_test, y_pred)\nplt.figure(figsize=(8, 6))\nsns.heatmap(conf_matrix, annot=True, fmt=\"d\", cmap=\"Blues\", xticklabels=iris.target_names, yticklabels=iris.target_names)\nplt.title('Confusion Matrix')\nplt.xlabel('Predicted Label')\nplt.ylabel('True Label')\nplt.show()\n```\n\n\nAccuracy: 0.98"
   },
   {
     "objectID": "posts/1-probability-theory/index.html#conclusion",
@@ -147,69 +84,6 @@
     "text": "Nonlinear Regression:\nNature of Relationship: Nonlinear regression allows for more complex relationships between the independent and dependent variables. The relationship can take various forms, such as quadratic, exponential, logarithmic, or other nonlinear shapes.\nEquation: The equation for a general nonlinear regression model is more complex and depends on the specific form of the relationship being modeled. For example, it could be \\(y = a \\cdot \\log(x) + b\\).\nOptimization: Optimization techniques such as gradient descent or other nonlinear optimization methods are used to find the parameters that minimize the difference between the predicted and observed values.\nIn practice, the choice between linear and nonlinear regression depends on the characteristics of the data and the underlying assumptions about the relationship being modeled. Data exploration and validation techniques are essential in determining the most appropriate approach."
   },
   {
-    "objectID": "posts/4-classification/index.html",
-    "href": "posts/4-classification/index.html",
-    "title": "Classification",
-    "section": "",
-    "text": "Classification is a fundamental task in supervised machine learning, aiming to assign predefined labels or categories to input data based on their features. During the training phase, the algorithm learns patterns and relationships between input features and labels, enabling it to predict labels for new, unseen data. Let’s delve into key concepts related to classification:"
-  },
-  {
-    "objectID": "posts/5-anomaly-outlier-detection/index.html",
-    "href": "posts/5-anomaly-outlier-detection/index.html",
-    "title": "Anomaly/outlier detection",
-    "section": "",
-    "text": "Anomaly and outlier detection are essential components of machine learning, ensuring that models accurately capture the underlying patterns within a dataset. Anomalies represent data points that deviate from the expected pattern or distribution, while outliers are observations with a low probability of occurrence, often distant from other data points."
-  },
-  {
-    "objectID": "posts/1-probability-theory/index.html#bernoulli-distribution",
-    "href": "posts/1-probability-theory/index.html#bernoulli-distribution",
-    "title": "Probability theory and random variables",
-    "section": "",
-    "text": "The Bernoulli distribution models binary outcomes (0 or 1). Below is a Python example using scipy.stats.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import bernoulli\n\n# Set the mean rate for the Poisson distribution\np = 0.3\n\n# Generate data for a Bernoulli distribution\ndata = np.random.choice([0, 1], size=1000, p=[1 - p, p])\n\n# Create a histogram\nplt.hist(data, bins=[-0.5, 0.5, 1.5], density=True, alpha=0.6)\n\n# Plot the probability mass function (PMF) of the Bernoulli distribution\nx = [0, 1]\npmf_values = bernoulli.pmf(x, p)\nplt.vlines(x, 0, pmf_values, colors='k', linestyles='-', lw=2)\n\n# Add labels and a title\nplt.title('Bernoulli Distribution: $p$ = %.2f' % p)\nplt.xlabel('Outcome')\nplt.ylabel('Probability')\n\nplt.xticks([0, 1], ['Failure', 'Success'])\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/1-probability-theory/index.html#poisson-distribution",
-    "href": "posts/1-probability-theory/index.html#poisson-distribution",
-    "title": "Probability theory and random variables",
-    "section": "",
-    "text": "Poisson distribution models event occurrences over a fixed period. Example code:\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import poisson\n\n# Set the mean rate for the Poisson distribution\nlam = 5\n\n# Generate data for a Poisson distribution\ndata = np.random.poisson(lam, 1000)\n\n# Create a histogram\nplt.hist(data, bins=50, density=True, alpha=0.6)\n\n# Plot the probability mass function (PMF) of the Poisson distribution\nxmin, xmax = plt.xlim()\nx = np.linspace(xmin, xmax, 100)\np = poisson.pmf(x, lam)\nplt.plot(x, p, 'k', linewidth=2)\n\n# Add labels and a title\nplt.title('Poisson Distribution: $\\lambda$ = %.2f' % lam)\nplt.xlabel('Number of Events')\nplt.ylabel('Probability')\n\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/1-probability-theory/index.html#gaussian-distribution",
-    "href": "posts/1-probability-theory/index.html#gaussian-distribution",
-    "title": "Probability theory and random variables",
-    "section": "",
-    "text": "The Gaussian distribution, or normal distribution, is versatile in probability theory. Example code:\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import norm\n\nmu = 0  # mean\nsigma = 1  # standard deviation\n\n# Generate data for a Gaussian distribution\ndata = np.random.normal(mu, sigma, 1000)\n\n# Create a histogram\nplt.hist(data, bins=50, density=True, alpha=0.6)\n\n# Plot the probability density function (PDF) of the Gaussian distribution\nxmin, xmax = plt.xlim()\nx = np.linspace(xmin, xmax, 100)\np = norm.pdf(x, mu, sigma)\nplt.plot(x, p, 'k')\n\n# Add labels and a title\nplt.title('Fit results: mu = %.2f,  std = %.2f' % (mu, sigma))\nplt.xlabel('Value')\nplt.ylabel('Frequency')\n\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/1-probability-theory/index.html#classification-with-gaussian-naive-bayes",
-    "href": "posts/1-probability-theory/index.html#classification-with-gaussian-naive-bayes",
-    "title": "Probability theory and random variables",
-    "section": "",
-    "text": "A practical example of applying probability theory in machine learning using Gaussian Naive Bayes for Iris dataset classification.\n\n\nCode\n```{python}\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn import datasets\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.naive_bayes import GaussianNB\nfrom sklearn.metrics import accuracy_score, confusion_matrix\nfrom sklearn.preprocessing import StandardScaler\nimport seaborn as sns\n\n# Load the Iris dataset\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\n\n# Split the dataset into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)\n\n# Standardize the features (mean=0 and variance=1)\nscaler = StandardScaler()\nX_train = scaler.fit_transform(X_train)\nX_test = scaler.transform(X_test)\n\n# Train a Gaussian Naive Bayes classifier\nnb_classifier = GaussianNB()\nnb_classifier.fit(X_train, y_train)\n\n# Make predictions on the test set\ny_pred = nb_classifier.predict(X_test)\n\n# Evaluate the accuracy\naccuracy = accuracy_score(y_test, y_pred)\nprint(f'Accuracy: {accuracy:.2f}')\n\n# Plot the confusion matrix using seaborn\nconf_matrix = confusion_matrix(y_test, y_pred)\nplt.figure(figsize=(8, 6))\nsns.heatmap(conf_matrix, annot=True, fmt=\"d\", cmap=\"Blues\", xticklabels=iris.target_names, yticklabels=iris.target_names)\nplt.title('Confusion Matrix')\nplt.xlabel('Predicted Label')\nplt.ylabel('True Label')\nplt.show()\n```\n\n\nAccuracy: 0.98"
-  },
-  {
-    "objectID": "posts/2-clustering/index.html#k-means-partitioning-data-with-centroids",
-    "href": "posts/2-clustering/index.html#k-means-partitioning-data-with-centroids",
-    "title": "Clustering",
-    "section": "k-means: Partitioning Data with Centroids",
-    "text": "k-means: Partitioning Data with Centroids\nThe k-means algorithm, pioneered by Stuart Lloyd at Bell Labs in 1957, has evolved into a powerful clustering method. Although initially conceived for pulse-code modulation, its publication in 1982 marked its entry into broader usage. Sometimes referred to as the Lloyd–Forgy algorithm, its core principle involves partitioning data into k clusters based on similarity.\nBefore we delve into the implementation, let’s import the necessary libraries for our clustering analysis.\n\n\nCode\n```{python}\n# Import necessary libraries\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import load_wine\nfrom sklearn.cluster import KMeans\nfrom sklearn.cluster import DBSCAN\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.decomposition import PCA\n```\n\n\nDetermining Optimal Number of Clusters with the Elbow Method: The Elbow Method is a technique used to find the optimal number of clusters in a dataset. It involves running k-means clustering on the dataset for a range of values of k (number of clusters) and plotting the sum of squared distances from each point to its assigned center. The “elbow” of the curve represents the point where adding more clusters does not significantly improve the fit.\n\n\nCode\n```{python}\n# Load the wine dataset\ndata = load_wine()\nX = data.data\n\n# Standardize the features\nscaler = StandardScaler()\nX = scaler.fit_transform(X)\n\n# Determine the optimal number of clusters using the Elbow Method\ndistortions = []\nfor i in range(1, 10):\n    kmeans = KMeans(n_clusters=i, n_init=10, random_state=42)\n    kmeans.fit(X)\n    distortions.append(kmeans.inertia_)\n\n# Plot the Elbow Curve\nplt.figure()\nplt.plot(range(1, 10), distortions, marker='o')\nplt.title('Elbow Method for Optimal k')\nplt.xlabel('Number of Clusters')\nplt.ylabel('Distortion')\nplt.show()\n```\n\n\n\n\n\nThe Elbow Method indicates that the optimal number of clusters for this dataset is 3. We apply the k-means algorithm to the standardized dataset with three clusters. The resulting cluster labels are assigned to each data point. The scatter plot illustrates the data points in this reduced space, with each point colored according to its assigned cluster. The red markers represent the centroids of the clusters.\nThis visualization provides a clear representation of how the k-means algorithm has grouped the data into distinct clusters based on similarity.\n\n\nCode\n```{python}\n# Apply k-means clustering with k=3\nkmeans = KMeans(n_clusters=3, n_init='auto')\nkmeans.fit(X)\nlabels = kmeans.labels_\n\n# Reduce data to two dimensions using PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n# Visualize the clusters and centroids in 2D\nplt.scatter(X_pca[:, 0], X_pca[:, 1], c=labels, cmap='viridis')\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\nplt.title('k-means Clustering')\nplt.show()\n```"
-  },
-  {
-    "objectID": "posts/2-clustering/index.html#dbscan-discovering-density-based-clusters",
-    "href": "posts/2-clustering/index.html#dbscan-discovering-density-based-clusters",
-    "title": "Clustering",
-    "section": "DBSCAN: Discovering Density-Based Clusters",
-    "text": "DBSCAN: Discovering Density-Based Clusters\nDBSCAN (Density-Based Spatial Clustering of Applications with Noise) is an alternative approach to clustering that excels in identifying clusters with varying shapes and sizes.\nLet’s explore the application of DBSCAN to our dataset. Before running DBSCAN, we standardize the features using the StandardScaler. The hyperparameters eps and min_samples control the density-based clustering. eps defines the maximum distance between two samples for one to be considered as in the neighborhood of the other, and min_samples sets the minimum number of samples required to form a dense region.\n\n\nCode\n```{python}\n# Standardize the features for DBSCAN\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Apply DBSCAN clustering\ndbscan = DBSCAN(eps=0.5, min_samples=5)\nlabels = dbscan.fit_predict(X_scaled)\n\n# Reduce data to two dimensions using PCA\npca = PCA(n_components=2)\nclustered_data_2d = pca.fit_transform(X_scaled)\n\n# Visualize the clusters, highlighting noise points in red\nplt.scatter(clustered_data_2d[:, 0], clustered_data_2d[:, 1], c=labels, cmap='viridis')\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\n\n# Add labels and title\nplt.title('DBSCAN Clustering')\nplt.show()\n```\n\n\n\n\n\nUnlike k-means, DBSCAN can identify clusters of arbitrary shapes and is robust to outliers.\nThis visualization provides insights into the structure of the data, showcasing how DBSCAN has grouped points based on their density, thereby revealing clusters with varying shapes and sizes."
-  },
-  {
-    "objectID": "posts/2-clustering/index.html#conclusion",
-    "href": "posts/2-clustering/index.html#conclusion",
-    "title": "Clustering",
-    "section": "Conclusion",
-    "text": "Conclusion\nk-means and DBSCAN serve as valuable tools in the clustering toolkit, offering distinct approaches to uncovering patterns and relationships in unlabeled data."
-  },
-  {
     "objectID": "posts/3-regression/index.html#example-linear-regression-with-california-housing-data",
     "href": "posts/3-regression/index.html#example-linear-regression-with-california-housing-data",
     "title": "Linear and Nonlinear regression",
@@ -224,32 +98,46 @@
     "text": "Conclusion\nLinear and nonlinear regression techniques offer versatile approaches for modeling relationships in data. Linear regression provides a simple and interpretable solution for linear dependencies, while nonlinear regression extends the capability to capture more complex patterns. The choice between them should be guided by the specific characteristics of the data and the nature of the relationship under investigation. Continuous evaluation and refinement of models based on performance metrics, such as Mean Squared Error, are crucial for building robust and accurate regression models."
   },
   {
-    "objectID": "posts/3-regression/index.html#linear-regression-1",
-    "href": "posts/3-regression/index.html#linear-regression-1",
-    "title": "Linear and Nonlinear regression",
-    "section": "Linear Regression:",
-    "text": "Linear Regression:\nNature of Relationship: Linear regression assumes a straightforward, linear relationship between independent and dependent variables, represented by a straight line.\nEquation: The equation for simple linear regression is \\(y = mx + b\\), where \\(y\\) is the dependent variable, \\(x\\) is the independent variable, \\(m\\) is the slope, and \\(b\\) is the y-intercept.\nOptimization: Model parameters are estimated using methods such as Ordinary Least Squares (OLS) to minimize the sum of squared differences between observed and predicted values."
+    "objectID": "posts/5-anomaly-outlier-detection/index.html",
+    "href": "posts/5-anomaly-outlier-detection/index.html",
+    "title": "Anomaly/outlier detection",
+    "section": "",
+    "text": "Anomaly and outlier detection are essential components of machine learning, ensuring that models accurately capture the underlying patterns within a dataset. Anomalies represent data points that deviate from the expected pattern or distribution, while outliers are observations with a low probability of occurrence, often distant from other data points."
   },
   {
-    "objectID": "posts/3-regression/index.html#nonlinear-regression-1",
-    "href": "posts/3-regression/index.html#nonlinear-regression-1",
-    "title": "Linear and Nonlinear regression",
-    "section": "Nonlinear Regression:",
-    "text": "Nonlinear Regression:\nNature of Relationship: Nonlinear regression allows for more intricate relationships between variables, accommodating various forms like quadratic, exponential, or logarithmic.\nEquation: The equation for a general nonlinear regression model depends on the specific form of the relationship, e.g., \\(y = a \\cdot \\log(x) + b\\).\nOptimization: Optimization techniques such as gradient descent are employed to find parameters minimizing the difference between predicted and observed values.\nIn practice, the choice between linear and nonlinear regression hinges on data characteristics and assumptions about the underlying relationship. Rigorous data exploration and validation are essential for making an informed decision."
+    "objectID": "posts/5-anomaly-outlier-detection/index.html#importance-of-anomaly-detection",
+    "href": "posts/5-anomaly-outlier-detection/index.html#importance-of-anomaly-detection",
+    "title": "Anomaly/outlier detection",
+    "section": "Importance of Anomaly Detection",
+    "text": "Importance of Anomaly Detection\nDetecting anomalies is crucial for various applications, such as identifying fraudulent activities in credit card transactions. Unusual amounts or transactions with atypical businesses can be flagged, leading to improved model features or the development of entirely new models."
   },
   {
-    "objectID": "posts/3-regression/index.html#example-linear-regression-with-california-housing-data-1",
-    "href": "posts/3-regression/index.html#example-linear-regression-with-california-housing-data-1",
-    "title": "Linear and Nonlinear regression",
-    "section": "Example: Linear Regression with California Housing Data",
-    "text": "Example: Linear Regression with California Housing Data\nLet’s illustrate linear regression using the California Housing dataset. We predict housing prices based on features and visualize the model’s performance.\n# (Code Snippet - Same as provided in previous response)\nIn the visualization, the red line represents a perfect prediction, and the scatter plot compares actual housing prices with predicted values. The Mean Squared Error (MSE) quantifies the model’s performance. Adjustments to the model or exploration of nonlinear regression may be necessary based on the analysis."
+    "objectID": "posts/5-anomaly-outlier-detection/index.html#significance-of-outlier-detection",
+    "href": "posts/5-anomaly-outlier-detection/index.html#significance-of-outlier-detection",
+    "title": "Anomaly/outlier detection",
+    "section": "Significance of Outlier Detection",
+    "text": "Significance of Outlier Detection\nOutliers, resulting from errors or unknown causes, can distort models and impact prediction accuracy. Recognizing outliers is vital to maintaining model integrity and ensuring robust predictions."
   },
   {
-    "objectID": "posts/3-regression/index.html#conclusion-1",
-    "href": "posts/3-regression/index.html#conclusion-1",
-    "title": "Linear and Nonlinear regression",
-    "section": "Conclusion:",
-    "text": "Conclusion:\nLinear and nonlinear regression techniques offer versatile approaches for modeling relationships in data. Linear regression provides a simple and interpretable solution for linear dependencies, while nonlinear regression extends the capability to capture more complex patterns. The choice between them should be guided by the specific characteristics of the data and the nature of the relationship under investigation. Continuous evaluation and refinement of models based on performance metrics, such as Mean Squared Error, are crucial for building robust and accurate regression models."
+    "objectID": "posts/5-anomaly-outlier-detection/index.html#dbscan-for-outlier-detection",
+    "href": "posts/5-anomaly-outlier-detection/index.html#dbscan-for-outlier-detection",
+    "title": "Anomaly/outlier detection",
+    "section": "DBSCAN for Outlier Detection",
+    "text": "DBSCAN for Outlier Detection\nOne method for outlier detection is DBSCAN (Density-Based Spatial Clustering of Applications With Noise). This technique considers a point as part of a cluster if it falls within a specified radius of a core point. Otherwise, the point is marked as an outlier. We will illustrate this concept using the multishapes dataset.\n\n\nCode\n```{python}\n# Import necessary libraries\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.ensemble import IsolationForest\nfrom sklearn.preprocessing import StandardScaler\n\n# Load the Credit Card Fraud Detection dataset\ndf = pd.read_csv(\"creditcard.csv\")\n\n# Display the first few rows of the dataset\nprint(df.head())\n\n# Select features (excluding time and Class columns)\nfeatures = df.columns[1:-1]\n\n# Standardize the features\nscaler = StandardScaler()\ndf[features] = scaler.fit_transform(df[features])\n\n# Fit the Isolation Forest model\nmodel = IsolationForest(contamination=0.001, random_state=42)\nmodel.fit(df[features])\n\n# Predict outliers\noutlier_preds = model.predict(df[features])\noutliers_mask = outlier_preds == -1  # -1 indicates an outlier\n\n# Visualize the results\nplt.scatter(df.loc[~outliers_mask, 'V1'], df.loc[~outliers_mask, 'V2'], color='blue', label='Normal')\nplt.scatter(df.loc[outliers_mask, 'V1'], df.loc[outliers_mask, 'V2'], color='red', label='Outlier')\nplt.title('Isolation Forest - Credit Card Fraud Detection')\nplt.xlabel('V1')\nplt.ylabel('V2')\nplt.legend()\nplt.show()\n```\n\n\n   Time        V1        V2        V3        V4        V5        V6        V7  \\\n0   0.0 -1.359807 -0.072781  2.536347  1.378155 -0.338321  0.462388  0.239599   \n1   0.0  1.191857  0.266151  0.166480  0.448154  0.060018 -0.082361 -0.078803   \n2   1.0 -1.358354 -1.340163  1.773209  0.379780 -0.503198  1.800499  0.791461   \n3   1.0 -0.966272 -0.185226  1.792993 -0.863291 -0.010309  1.247203  0.237609   \n4   2.0 -1.158233  0.877737  1.548718  0.403034 -0.407193  0.095921  0.592941   \n\n         V8        V9  ...       V21       V22       V23       V24       V25  \\\n0  0.098698  0.363787  ... -0.018307  0.277838 -0.110474  0.066928  0.128539   \n1  0.085102 -0.255425  ... -0.225775 -0.638672  0.101288 -0.339846  0.167170   \n2  0.247676 -1.514654  ...  0.247998  0.771679  0.909412 -0.689281 -0.327642   \n3  0.377436 -1.387024  ... -0.108300  0.005274 -0.190321 -1.175575  0.647376   \n4 -0.270533  0.817739  ... -0.009431  0.798278 -0.137458  0.141267 -0.206010   \n\n        V26       V27       V28  Amount  Class  \n0 -0.189115  0.133558 -0.021053  149.62      0  \n1  0.125895 -0.008983  0.014724    2.69      0  \n2 -0.139097 -0.055353 -0.059752  378.66      0  \n3 -0.221929  0.062723  0.061458  123.50      0  \n4  0.502292  0.219422  0.215153   69.99      0  \n\n[5 rows x 31 columns]\n\n\n\n\n\nIn the visualization, normal data points are marked in blue, while outliers are highlighted in red. This representation provides a clear distinction between the normal and outlier observations based on the Isolation Forest model."
+  },
+  {
+    "objectID": "posts/5-anomaly-outlier-detection/index.html#conclusion",
+    "href": "posts/5-anomaly-outlier-detection/index.html#conclusion",
+    "title": "Anomaly/outlier detection",
+    "section": "Conclusion",
+    "text": "Conclusion\nAnomaly and outlier detection are indispensable for maintaining the reliability and accuracy of machine learning models. Employing techniques like DBSCAN and Isolation Forest allows for the identification of unusual patterns, contributing to enhanced model performance and the overall effectiveness of predictive systems."
+  },
+  {
+    "objectID": "posts/4-classification/index.html",
+    "href": "posts/4-classification/index.html",
+    "title": "Classification",
+    "section": "",
+    "text": "Classification is a fundamental task in supervised machine learning, aiming to assign predefined labels or categories to input data based on their features. During the training phase, the algorithm learns patterns and relationships between input features and labels, enabling it to predict labels for new, unseen data. Let’s delve into key concepts related to classification:"
   },
   {
     "objectID": "posts/4-classification/index.html#key-concepts",
@@ -280,31 +168,31 @@
     "text": "Conclusion\nClassification is a powerful tool with applications ranging from spam detection to medical diagnosis. Understanding the underlying concepts and utilizing appropriate algorithms are essential for building accurate and effective models. Through continuous exploration and refinement, the field of classification continues to contribute significantly to the advancement of machine learning and data science."
   },
   {
-    "objectID": "posts/5-anomaly-outlier-detection/index.html#importance-of-anomaly-detection",
-    "href": "posts/5-anomaly-outlier-detection/index.html#importance-of-anomaly-detection",
-    "title": "Anomaly/outlier detection",
-    "section": "Importance of Anomaly Detection",
-    "text": "Importance of Anomaly Detection\nDetecting anomalies is crucial for various applications, such as identifying fraudulent activities in credit card transactions. Unusual amounts or transactions with atypical businesses can be flagged, leading to improved model features or the development of entirely new models."
+    "objectID": "posts/2-clustering/index.html",
+    "href": "posts/2-clustering/index.html",
+    "title": "Clustering",
+    "section": "",
+    "text": "Clustering, a cornerstone of unsupervised machine learning, empowers the discovery of inherent patterns and relationships within data without pre-existing labels. This versatile technique finds applications in diverse domains, including data analysis, customer segmentation, recommender systems, search engines, image segmentation, semi-supervised learning, and dimensionality reduction."
   },
   {
-    "objectID": "posts/5-anomaly-outlier-detection/index.html#significance-of-outlier-detection",
-    "href": "posts/5-anomaly-outlier-detection/index.html#significance-of-outlier-detection",
-    "title": "Anomaly/outlier detection",
-    "section": "Significance of Outlier Detection",
-    "text": "Significance of Outlier Detection\nOutliers, resulting from errors or unknown causes, can distort models and impact prediction accuracy. Recognizing outliers is vital to maintaining model integrity and ensuring robust predictions."
+    "objectID": "posts/2-clustering/index.html#k-means-partitioning-data-with-centroids",
+    "href": "posts/2-clustering/index.html#k-means-partitioning-data-with-centroids",
+    "title": "Clustering",
+    "section": "k-means: Partitioning Data with Centroids",
+    "text": "k-means: Partitioning Data with Centroids\nThe k-means algorithm, pioneered by Stuart Lloyd at Bell Labs in 1957, has evolved into a powerful clustering method. Although initially conceived for pulse-code modulation, its publication in 1982 marked its entry into broader usage. Sometimes referred to as the Lloyd–Forgy algorithm, its core principle involves partitioning data into k clusters based on similarity.\nBefore we delve into the implementation, let’s import the necessary libraries for our clustering analysis.\n\n\nCode\n```{python}\n# Import necessary libraries\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import load_wine\nfrom sklearn.cluster import KMeans\nfrom sklearn.cluster import DBSCAN\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.decomposition import PCA\n```\n\n\nDetermining Optimal Number of Clusters with the Elbow Method: The Elbow Method is a technique used to find the optimal number of clusters in a dataset. It involves running k-means clustering on the dataset for a range of values of k (number of clusters) and plotting the sum of squared distances from each point to its assigned center. The “elbow” of the curve represents the point where adding more clusters does not significantly improve the fit.\n\n\nCode\n```{python}\n# Load the wine dataset\ndata = load_wine()\nX = data.data\n\n# Standardize the features\nscaler = StandardScaler()\nX = scaler.fit_transform(X)\n\n# Determine the optimal number of clusters using the Elbow Method\ndistortions = []\nfor i in range(1, 10):\n    kmeans = KMeans(n_clusters=i, n_init=10, random_state=42)\n    kmeans.fit(X)\n    distortions.append(kmeans.inertia_)\n\n# Plot the Elbow Curve\nplt.figure()\nplt.plot(range(1, 10), distortions, marker='o')\nplt.title('Elbow Method for Optimal k')\nplt.xlabel('Number of Clusters')\nplt.ylabel('Distortion')\nplt.show()\n```\n\n\n\n\n\nThe Elbow Method indicates that the optimal number of clusters for this dataset is 3. We apply the k-means algorithm to the standardized dataset with three clusters. The resulting cluster labels are assigned to each data point. The scatter plot illustrates the data points in this reduced space, with each point colored according to its assigned cluster. The red markers represent the centroids of the clusters.\nThis visualization provides a clear representation of how the k-means algorithm has grouped the data into distinct clusters based on similarity.\n\n\nCode\n```{python}\n# Apply k-means clustering with k=3\nkmeans = KMeans(n_clusters=3, n_init='auto')\nkmeans.fit(X)\nlabels = kmeans.labels_\n\n# Reduce data to two dimensions using PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X)\n\n# Visualize the clusters and centroids in 2D\nplt.scatter(X_pca[:, 0], X_pca[:, 1], c=labels, cmap='viridis')\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\nplt.title('k-means Clustering')\nplt.show()\n```"
   },
   {
-    "objectID": "posts/5-anomaly-outlier-detection/index.html#dbscan-for-outlier-detection",
-    "href": "posts/5-anomaly-outlier-detection/index.html#dbscan-for-outlier-detection",
-    "title": "Anomaly/outlier detection",
-    "section": "DBSCAN for Outlier Detection",
-    "text": "DBSCAN for Outlier Detection\nOne method for outlier detection is DBSCAN (Density-Based Spatial Clustering of Applications With Noise). This technique considers a point as part of a cluster if it falls within a specified radius of a core point. Otherwise, the point is marked as an outlier. We will illustrate this concept using the multishapes dataset.\n\n\nCode\n```{python}\n# Import necessary libraries\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.ensemble import IsolationForest\nfrom sklearn.preprocessing import StandardScaler\n\n# Load the Credit Card Fraud Detection dataset\ndf = pd.read_csv(\"creditcard.csv\")\n\n# Display the first few rows of the dataset\nprint(df.head())\n\n# Select features (excluding time and Class columns)\nfeatures = df.columns[1:-1]\n\n# Standardize the features\nscaler = StandardScaler()\ndf[features] = scaler.fit_transform(df[features])\n\n# Fit the Isolation Forest model\nmodel = IsolationForest(contamination=0.001, random_state=42)\nmodel.fit(df[features])\n\n# Predict outliers\noutlier_preds = model.predict(df[features])\noutliers_mask = outlier_preds == -1  # -1 indicates an outlier\n\n# Visualize the results\nplt.scatter(df.loc[~outliers_mask, 'V1'], df.loc[~outliers_mask, 'V2'], color='blue', label='Normal')\nplt.scatter(df.loc[outliers_mask, 'V1'], df.loc[outliers_mask, 'V2'], color='red', label='Outlier')\nplt.title('Isolation Forest - Credit Card Fraud Detection')\nplt.xlabel('V1')\nplt.ylabel('V2')\nplt.legend()\nplt.show()\n```\n\n\n   Time        V1        V2        V3        V4        V5        V6        V7  \\\n0   0.0 -1.359807 -0.072781  2.536347  1.378155 -0.338321  0.462388  0.239599   \n1   0.0  1.191857  0.266151  0.166480  0.448154  0.060018 -0.082361 -0.078803   \n2   1.0 -1.358354 -1.340163  1.773209  0.379780 -0.503198  1.800499  0.791461   \n3   1.0 -0.966272 -0.185226  1.792993 -0.863291 -0.010309  1.247203  0.237609   \n4   2.0 -1.158233  0.877737  1.548718  0.403034 -0.407193  0.095921  0.592941   \n\n         V8        V9  ...       V21       V22       V23       V24       V25  \\\n0  0.098698  0.363787  ... -0.018307  0.277838 -0.110474  0.066928  0.128539   \n1  0.085102 -0.255425  ... -0.225775 -0.638672  0.101288 -0.339846  0.167170   \n2  0.247676 -1.514654  ...  0.247998  0.771679  0.909412 -0.689281 -0.327642   \n3  0.377436 -1.387024  ... -0.108300  0.005274 -0.190321 -1.175575  0.647376   \n4 -0.270533  0.817739  ... -0.009431  0.798278 -0.137458  0.141267 -0.206010   \n\n        V26       V27       V28  Amount  Class  \n0 -0.189115  0.133558 -0.021053  149.62      0  \n1  0.125895 -0.008983  0.014724    2.69      0  \n2 -0.139097 -0.055353 -0.059752  378.66      0  \n3 -0.221929  0.062723  0.061458  123.50      0  \n4  0.502292  0.219422  0.215153   69.99      0  \n\n[5 rows x 31 columns]\n\n\n\n\n\nIn the visualization, normal data points are marked in blue, while outliers are highlighted in red. This representation provides a clear distinction between the normal and outlier observations based on the Isolation Forest model."
+    "objectID": "posts/2-clustering/index.html#dbscan-discovering-density-based-clusters",
+    "href": "posts/2-clustering/index.html#dbscan-discovering-density-based-clusters",
+    "title": "Clustering",
+    "section": "DBSCAN: Discovering Density-Based Clusters",
+    "text": "DBSCAN: Discovering Density-Based Clusters\nDBSCAN (Density-Based Spatial Clustering of Applications with Noise) is an alternative approach to clustering that excels in identifying clusters with varying shapes and sizes.\nLet’s explore the application of DBSCAN to our dataset. Before running DBSCAN, we standardize the features using the StandardScaler. The hyperparameters eps and min_samples control the density-based clustering. eps defines the maximum distance between two samples for one to be considered as in the neighborhood of the other, and min_samples sets the minimum number of samples required to form a dense region.\n\n\nCode\n```{python}\n# Standardize the features for DBSCAN\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Apply DBSCAN clustering\ndbscan = DBSCAN(eps=0.5, min_samples=5)\nlabels = dbscan.fit_predict(X_scaled)\n\n# Reduce data to two dimensions using PCA\npca = PCA(n_components=2)\nclustered_data_2d = pca.fit_transform(X_scaled)\n\n# Visualize the clusters, highlighting noise points in red\nplt.scatter(clustered_data_2d[:, 0], clustered_data_2d[:, 1], c=labels, cmap='viridis')\ncenters_pca = pca.transform(kmeans.cluster_centers_)\nplt.scatter(centers_pca[:, 0], centers_pca[:, 1], s=200, c='red')\n\n# Add labels and title\nplt.title('DBSCAN Clustering')\nplt.show()\n```\n\n\n\n\n\nUnlike k-means, DBSCAN can identify clusters of arbitrary shapes and is robust to outliers.\nThis visualization provides insights into the structure of the data, showcasing how DBSCAN has grouped points based on their density, thereby revealing clusters with varying shapes and sizes."
   },
   {
-    "objectID": "posts/5-anomaly-outlier-detection/index.html#conclusion",
-    "href": "posts/5-anomaly-outlier-detection/index.html#conclusion",
-    "title": "Anomaly/outlier detection",
+    "objectID": "posts/2-clustering/index.html#conclusion",
+    "href": "posts/2-clustering/index.html#conclusion",
+    "title": "Clustering",
     "section": "Conclusion",
-    "text": "Conclusion\nAnomaly and outlier detection are indispensable for maintaining the reliability and accuracy of machine learning models. Employing techniques like DBSCAN and Isolation Forest allows for the identification of unusual patterns, contributing to enhanced model performance and the overall effectiveness of predictive systems."
+    "text": "Conclusion\nk-means and DBSCAN serve as valuable tools in the clustering toolkit, offering distinct approaches to uncovering patterns and relationships in unlabeled data."
   }
 ]
