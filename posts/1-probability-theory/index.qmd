@@ -2,63 +2,37 @@
 execute:
   echo: fenced
 title: "Probability theory and random variables"
-toc: true
-toc-title: "Table of Contents"
 title-block-banner: false
 author: Kamila Nurkhametova
 ---
 
-Machine learning often involves the use of probability theory and random variables to model uncertainty, make predictions, and make decisions. Let's break down some key concepts in this context.
+# Probability Theory and Random Variables
 
-## Basic concepts
+Machine learning frequently relies on probability theory and random variables to model uncertainty, make predictions, and inform decision-making. In this post, we'll delve into key concepts in these domains.
 
-Broadly speaking, probability theory is the mathematical study of uncertainty. It plays a central role in machine learning, as the design of learning algorithms often relies on probabilistic assumption of the data. This set of notes attempts to cover some basic probability theory that serves as a background for the class.
+## Basic Concepts
 
-### Probability Theory
+**Probability Theory:**
+Probability in machine learning quantifies uncertainty, representing the likelihood of an event occurring, ranging from 0 (impossible) to 1 (certain). This is pivotal in algorithm design, often associated with outcomes of interest.
 
-In machine learning, probability is used to quantify uncertainty. It is a measure of the likelihood that a particular event will occur. Probabilities range from 0 (impossible event) to 1 (certain event). In the context of machine learning, probabilities are often associated with outcomes of interest.
+- **Conditional Probability:** Probability of an event given another has occurred. Crucial in Bayesian methods.
+- **Bayesian Inference:** Uses Bayes' theorem to update hypotheses' probability with new evidence.
 
-**Conditional Probability.** This is the probability of an event occurring given that another event has already occurred. In machine learning, understanding conditional probability is crucial, especially in Bayesian methods.
 
-**Bayesian Inference.** It is an approach to statistical inference where Bayes' theorem is used to update the probability for a hypothesis as more evidence or information becomes available.
+**Random Variables:**
+In probability theory, these are functions mapping outcomes to real values, classifying uncertainty.
 
-### Probability Space
+- **Discrete Random Variables:** Have countable distinct values, e.g., die outcomes.
+- **Continuous Random Variables:** Can take any value within a range, like height or temperature.
 
-When we speak about probability, we often refer to the probability of an event of uncertain nature taking place. For example, we speak about the probability of rain next Tuesday.
+**Probability Distributions:**
+Describe how a random variable's values are distributed. Key types include Joint, Marginal, and Conditional Distributions.
 
-Formally, a *probability space* is defined by the triple $(\Omega, \mathcal{F}, P)$, where
+## Bernoulli Distribution
 
-*   $\Omega$ is the *space of possible outcomes* (or *outcome space*),
-*   $\mathcal{F} \subseteq 2^{\Omega}$  is the *space of (measurable) events* (or *event space*),
-*   $P$ is the probability measure (or probability distribution) that maps an event $E \in \mathcal{F}$ to a real value between 0 and 1 (think of $P$ as a function).
-
-### Random Variables
-
-Random variables play an important role in probability theory. The most important fact about random variables is that they are **not** variables. They are actually **functions** that map outcomes (in the outcome space) to real values. In terms of notation, we usually denote random variables by a capital letter
-
-In machine learning, random variables are used to model uncertainty in various processes.
-
-Discrete Random Variables. These take on a countable number of distinct values. For example, the outcome of rolling a die is a discrete random variable.
-
-Continuous Random Variables. These can take any value within a range. Examples include the height of a person or the temperature at a given time.
-
-### Probability Distributions, Joint Distributions, and Marginal Distributions
-
-A probability distribution describes how the values of a random variable are distributed. In machine learning, probability distributions are used to model uncertainty in data and parameters.
-
-**Joint Distribution** describes the probability of multiple random variables occurring simultaneously.
-
-**Marginal Distribution** describes the probability distribution of a subset of random variables without reference to the values of the other variables.
-
-**Conditional distributions** are one of the key tools in probability theory for reasoning about uncertainty. They specify the distribution of a random variable when the value of another random variable is known (or more generally, when some event is known to be true).
-
-### Bernoulli distribution
-
-The *Bernoulli distribution* is one of the most basic distribution. A random variable distributed according to the Bernoulli distribution can take on two possible values, {0, 1}. It is often used to indicate whether a trail is successful or not.
+The Bernoulli distribution models binary outcomes (0 or 1). Below is a Python example using `scipy.stats`.
 
 ```{python}
-#| fig-cap: "Bernoulli distribution"
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import bernoulli
@@ -87,13 +61,11 @@ plt.show()
 
 ```
 
-### Poisson distribution
+## Poisson Distribution
 
-The *Poisson distribution* is a very useful distribution that deals with the arrival of events. It measures probaiblity of the number of events happening over a fixed period of time, given a fixed average rate of occurrence, and that the events take place independently of the time since the last event.
+Poisson distribution models event occurrences over a fixed period. Example code:
 
 ```{python}
-#| fig-cap: "Poisson distribution"
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import poisson
@@ -122,13 +94,11 @@ plt.show()
 
 ```
 
-### Gaussian distribution
+## Gaussian Distribution
 
-The *Gaussian distribution*, also known as the *normal distribution*, is one of the most “versatile” distributions in probability theory, and appears in a wide variety of contexts. For example, it can be used to approximate the binomial distribution when the number of experiments is large, or the Poisson distribution when the average arrival rate is high. It is also related to the Law of Large Numbers. For many problems, we will also often assume that when noise in the system is Gaussian distributed. The list of applications is endless.
+The Gaussian distribution, or normal distribution, is versatile in probability theory. Example code:
 
 ```{python}
-#| fig-cap: "Gussian distribution"
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
@@ -159,21 +129,57 @@ plt.show()
 
 ## Defining a Probability Distribution
 
-There are two classes of distribution that require seemingly different treatments. Namely, *discrete* distributions and *continuous* distributions.
+Two classes: Discrete and Continuous Distributions. Discrete involves finite values; Continuous involves infinite values.
 
-### Discrete Distribution
+## Classification with Gaussian Naive Bayes
 
-By a discrete distribution, we mean that the random variable of the underlying distribution can take on only finitely many different values (or that the outcome space is finite). Examples include the binomial distribution (for binary outcomes) and the Poisson distribution (for count data).
+A practical example of applying probability theory in machine learning using Gaussian Naive Bayes for Iris dataset classification.
 
-### Continuous Distribution
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.preprocessing import StandardScaler
+import seaborn as sns
 
-By a continuous distribution, we mean that the random variable of the underlying distribution can take on infinitely many different values (or that the outcome space is infinite). Examples include the normal distribution (bell-shaped curve) and the exponential distribution.
+# Load the Iris dataset
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
 
-## Expectations and Variance
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-One of the most common operations we perform on a random variable is to compute its *expectation*, also known as its *mean*, *expected value*, or *first moment*. The expectation is the average value of a random variable. In machine learning, it's often used to summarize the central tendency of a distribution.
+# Standardize the features (mean=0 and variance=1)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 
-*Variance* measures how spread out the values of a random variable are. It gives a sense of the dispersion of data. Sometimes it is also referred to as the *second moment*.
+# Train a Gaussian Naive Bayes classifier
+nb_classifier = GaussianNB()
+nb_classifier.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = nb_classifier.predict(X_test)
+
+# Evaluate the accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy:.2f}')
+
+# Plot the confusion matrix using seaborn
+conf_matrix = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.show()
+
+```
 
 ## Conclusion
-Understanding probability theory and random variables is crucial for various machine learning tasks, including classification, regression, and reinforcement learning. Probabilistic models provide a natural framework for dealing with uncertainty in real-world data.
+
+Understanding probability theory and random variables is pivotal in various machine learning tasks, providing a natural framework to handle uncertainty in real-world data.

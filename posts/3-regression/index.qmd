@@ -2,8 +2,6 @@
 execute:
   echo: fenced
 title: "Linear and Nonlinear regression"
-toc: true
-toc-title: "Table of Contents"
 title-block-banner: false
 author: Kamila Nurkhametova
 ---
